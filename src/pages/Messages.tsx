@@ -9,6 +9,7 @@ export function Messages() {
   const [items, setItems] = useState(sourceMessages);
   const [selected, setSelected] = useState<Message | null>(sourceMessages[0]);
   const empty = getHashParam("state") === "empty";
+  const unreadCount = items.filter((item) => item.unread).length;
   const filtered = useMemo(() => {
     if (empty) return [];
     return items.filter((item) => (tab === "未读" ? item.unread : true)).filter((item) => (category === "全部" ? true : item.category === category));
@@ -18,11 +19,18 @@ export function Messages() {
     setItems((prev) => prev.map((item) => (item.id === id ? { ...item, unread: false } : item)));
   };
 
+  const markAllRead = () => {
+    setItems((prev) => prev.map((item) => ({ ...item, unread: false })));
+  };
+
   return (
     <SubPageShell title="消息中心">
       <div className="grid h-full grid-cols-[190px_1fr] gap-3">
         <Card className="p-3">
           <PageTabs value={tab} onChange={setTab} options={["全部", "未读"]} />
+          <Button className="mt-3 w-full" variant="secondary" disabled={unreadCount === 0} onClick={markAllRead}>
+            一键已读{unreadCount > 0 ? ` ${unreadCount}` : ""}
+          </Button>
           <div className="mt-3 grid gap-2">
             {["全部", "系统公告", "交易通知"].map((item) => (
               <Button key={item} variant={category === item ? "primary" : "ghost"} onClick={() => setCategory(item)}>{item}</Button>

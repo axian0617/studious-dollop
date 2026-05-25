@@ -184,7 +184,7 @@ export function Transactions() {
             <p className="mt-1 font-[Arial] text-[30px] font-bold text-brand">{totalAmount.toLocaleString()}.00</p>
             <p className="mt-4 text-[13px] text-muted">交易笔数</p>
             <p className="mt-1 font-[Arial] text-[28px] font-bold text-ink">{rows.length}</p>
-            <p className="mt-4 rounded-xl bg-[#F2F8FF] p-3 text-[13px] leading-5 text-muted">筛选浮层限制在终端画布内，详情通过右侧抽屉展示。</p>
+            <p className="mt-4 rounded-xl bg-[#F2F8FF] p-3 text-[13px] leading-5 text-muted">更多交易查询，请在手机应用市场下载“银联商务APP”</p>
           </Card>
           <Card className="overflow-hidden p-3">
             {mode === "empty" && <EmptyState title="暂无交易记录" hint="可调整筛选条件后重新查询" />}
